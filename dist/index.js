@@ -6599,7 +6599,7 @@ const setup_ros_windows_pip3Packages = ["lxml", "netifaces"];
  */
 function prepareRos2BuildEnvironment() {
     return setup_ros_windows_awaiter(this, void 0, void 0, function* () {
-        const python_dir = tool_cache.find("Python", "3.7");
+        const python_dir = tool_cache.find("Python", "3.8");
         yield utils_exec(external_path_.join(python_dir, "python"), [
             "-c",
             "import sysconfig; print(sysconfig.get_config_var('BINDIR')); print(sysconfig.get_path('scripts'))",
@@ -6614,6 +6614,7 @@ function prepareRos2BuildEnvironment() {
                 },
             },
         });
+        core.exportVariable("PY_PYTHON", "3.8");
         core.addPath("c:\\program files\\cppcheck");
         yield installChocoDependencies();
         yield downloadAndInstallRos2NugetPackages();
@@ -6644,6 +6645,7 @@ function prepareRos2BinaryReleases() {
                 ]);
             }
         }
+        yield utils_exec("printenv");
     });
 }
 /**

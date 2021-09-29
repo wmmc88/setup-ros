@@ -22,7 +22,7 @@ const pip3Packages: string[] = ["lxml", "netifaces"];
  * Install ROS 2 build tools.
  */
 async function prepareRos2BuildEnvironment() {
-	const python_dir = tc.find("Python", "3.7");
+	const python_dir = tc.find("Python", "3.8");
 
 	await utils.exec(
 		path.join(python_dir, "python"),
@@ -42,6 +42,7 @@ async function prepareRos2BuildEnvironment() {
 			},
 		}
 	);
+	core.exportVariable("PY_PYTHON", "3.8");
 
 	core.addPath("c:\\program files\\cppcheck");
 	await chocolatey.installChocoDependencies();
@@ -72,6 +73,7 @@ async function prepareRos2BinaryReleases() {
 			]);
 		}
 	}
+	await utils.exec("printenv");
 }
 
 /**
